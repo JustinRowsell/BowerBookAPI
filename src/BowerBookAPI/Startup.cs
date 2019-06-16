@@ -32,8 +32,8 @@ namespace BowerBookAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Add DI for EF Core
-            services.AddDbContext<CoreContext>(options => options
-                .UseNpgsql(Configuration.GetConnectionString("CoreDatabase")));
+            // services.AddDbContext<CoreContext>(options => options
+            //     .UseNpgsql(Configuration.GetConnectionString("CoreDatabase")));
 
             // Add S3 to the ASP.NET Core dependency injection framework.
             services.AddAWSService<Amazon.S3.IAmazonS3>();

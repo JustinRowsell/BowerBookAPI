@@ -3,7 +3,7 @@ using BowerBookAPI.Interfaces.Data;
 
 namespace BowerBookAPI.Models.Core
 {
-    public class ProgressModel : IUniqueId
+    public class Progress : IUniqueId
     {
         public int Id => ProgressId;
         public int ProgressId { get; set; }

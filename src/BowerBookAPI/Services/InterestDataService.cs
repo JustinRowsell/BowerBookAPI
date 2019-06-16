@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Amazon.DynamoDBv2;
 using BowerBookAPI.Data;
+using BowerBookAPI.Data.Collections;
 using BowerBookAPI.Interfaces.Services;
 using BowerBookAPI.Models.Core;
 
@@ -9,16 +10,16 @@ namespace BowerBookAPI.Services {
   public class InterestDataService: IInterestDataService
   {
         private CoreRepository _repository;
-        public InterestDataService(CoreContext context, CoreRepository repository = null)
+        public InterestDataService(CoreRepository repository = null)
         {
             if (repository != null)
                 _repository = repository;
             else
-                _repository = new CoreRepository(context);
+                _repository = new CoreRepository(new BowerBookDatabase());
         }
 
-        public List<InterestModel> GetAllInterests() {
-            return _repository.GetAllInterests()?.Select(i => new InterestModel
+        public List<Interest> GetAllInterests() {
+            return _repository.GetAllInterests()?.Select(i => new Interest
             {
                 Category = i.Category,
                 InterestId = i.InterestId,
@@ -27,7 +28,7 @@ namespace BowerBookAPI.Services {
             }).ToList();
         }
 
-        public InterestModel GetInterest(int id)
+        public Interest GetInterest(int id)
         {
             throw new System.NotImplementedException();
         }
