@@ -1,0 +1,1 @@
+deploy with this - dotnet lambda deploy-serverless -sb bowerbookapi -sfrole bowerbookapi --profile default
