@@ -7,25 +7,37 @@ using BowerBookAPI.Models.Core;
 
 namespace BowerBookAPI.Data.Collections
 {
-    public abstract class BaseCollection
+    public abstract class BaseCollection<T>
     {
         #region Data access
-        public BaseCollection(IMongoDatabase baseDatabase)
+        public void Init(IMongoDatabase database)
         {
-            Database = baseDatabase;
+            Database = database;
         }
         internal virtual IMongoDatabase Database { get; set; }
 
-        public IMongoCollection<T> GetCollection<T>()
+        private IMongoCollection<T> _collection;
+        public IMongoCollection<T> Collection
         {
-            return Database.GetCollection<T>(CollectionName);
+            get
+            {
+                if (_collection == null)
+                    _collection = Database.GetCollection<T>(CollectionName);
+                return _collection;
+            }
+            
         }
 
         public abstract string CollectionName { get; }
         #endregion
 
         #region Queries
-
+        public abstract T Get(int id);
+        public List<T> GetAll()
+        {
+            var documents =  Collection.Find(_ => true).ToList();
+            return documents;
+        }
         #endregion
     }
 }

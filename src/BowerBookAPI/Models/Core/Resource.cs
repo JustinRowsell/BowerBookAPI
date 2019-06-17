@@ -8,6 +8,6 @@ namespace BowerBookAPI.Models.Core
         public int ResourceId { get; set; }
         public string ResourceName { get; set; }
         public string Link { get; set; }
-        public ProgressModel Progress { get; set; }
+        public Progress Progress { get; set; }
     }
 }

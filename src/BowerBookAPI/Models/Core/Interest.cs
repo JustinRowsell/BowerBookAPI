@@ -8,7 +8,7 @@ namespace BowerBookAPI.Models.Core
         public string InterestName { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }
-        public List<ResourceModel> Resources { get; set; }
-        public List<TagModel> Tags { get; set; }
+        public List<Resource> Resources { get; set; }
+        public List<Tag> Tags { get; set; }
     }
 }

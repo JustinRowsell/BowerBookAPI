@@ -19,13 +19,7 @@ namespace BowerBookAPI.Services {
         }
 
         public List<Interest> GetAllInterests() {
-            return _repository.GetAllInterests()?.Select(i => new Interest
-            {
-                Category = i.Category,
-                InterestId = i.InterestId,
-                InterestName = i.InterestName,
-                Description = i.Description
-            }).ToList();
+            return _repository.GetAllInterests();
         }
 
         public Interest GetInterest(int id)

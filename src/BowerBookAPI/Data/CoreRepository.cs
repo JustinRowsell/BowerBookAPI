@@ -18,19 +18,14 @@ namespace BowerBookAPI.Data
 
         public List<Interest> GetAllInterests()
         {
-            // return _context.Interest.ToList();
-            return new List<Interest>
-            {
-                new Interest { InterestId = 1, InterestName = "Test"}
-            };
+            return Interest.GetAll();
         }
 
         public Interest GetInterest(int id)
         {
-            // return _context.Interest.FirstOrDefault(b => b.InterestId == id);
-            return InterestRepository.Get(1);
+            return Interest.Get(id);
         }
 
-        public IInterestRepository InterestRepository { get; set; }
+        public Interests Interest { get; set; }
     }
 }
