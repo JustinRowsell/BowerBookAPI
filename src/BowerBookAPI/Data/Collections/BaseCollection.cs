@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BowerBookAPI.Models.Core;
+using MongoDB.Bson;
 
 namespace BowerBookAPI.Data.Collections
 {
@@ -32,7 +33,7 @@ namespace BowerBookAPI.Data.Collections
         #endregion
 
         #region Queries
-        public abstract T Get(int id);
+        public abstract T Get(ObjectId id);
         public List<T> GetAll()
         {
             var documents =  Collection.Find(_ => true).ToList();

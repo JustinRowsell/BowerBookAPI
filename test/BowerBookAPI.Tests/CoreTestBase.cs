@@ -9,6 +9,7 @@ namespace BowerBookAPI.Tests
 {
     public class CoreTestBase
     {
+        /* TODO
         protected readonly CoreContext _context;
         public CoreTestBase()
         {
@@ -38,6 +39,6 @@ namespace BowerBookAPI.Tests
             context.Interest.AddRange(interests);
 
             context.SaveChanges();
-        }
+        } */
     }
 }

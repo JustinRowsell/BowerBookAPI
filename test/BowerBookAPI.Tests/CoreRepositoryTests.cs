@@ -9,7 +9,7 @@ namespace BowerBookAPI.Tests
 {
     [TestFixture]
     public class CoreRepositoryTests : CoreTestBase
-    {
+    {/* TODO
         [Test]
         public void ShouldGetFeaturedBlogs()
         {
@@ -34,6 +34,6 @@ namespace BowerBookAPI.Tests
 
             // Assert
             Assert.NotNull(interest);
-        }
+        } */
     }
 }

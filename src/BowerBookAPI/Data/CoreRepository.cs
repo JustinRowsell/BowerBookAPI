@@ -1,6 +1,7 @@
 ﻿using BowerBookAPI.Data.Collections;
 using BowerBookAPI.Interfaces.Data.Repository;
 using BowerBookAPI.Models.Core;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,23 @@ namespace BowerBookAPI.Data
 
         public List<Interest> GetAllInterests()
         {
-            return Interest.GetAll();
+            return Interests.GetAll();
         }
 
-        public Interest GetInterest(int id)
+        public Interest GetInterest(ObjectId id)
         {
-            return Interest.Get(id);
+            return Interests.Get(id);
         }
 
-        public Interests Interest { get; set; }
+        private Interests _interests;
+        public Interests Interests
+        {
+            get
+            {
+                if (_interests == null)
+                    _interests = new Interests(_database.Database);
+                return _interests;
+            }
+        }
     }
 }

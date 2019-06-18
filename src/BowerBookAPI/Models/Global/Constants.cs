@@ -9,12 +9,12 @@ namespace BowerBookAPI.Models.Global
     {
         public static class Data
         {
-            public static string DatabaseName = "BowerBook";
+            public static string InterestDatabaseName = "interest";
             public static class Collections
             {
-                public static string Interests = "Interests";
-                public static string Resources = "Resources";
-                public static string Tags = "Tags";
+                public static string Interests = "interests";
+                public static string Resources = "resources";
+                public static string Tags = "tags";
             }
         }
     }

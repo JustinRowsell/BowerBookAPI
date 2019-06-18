@@ -14,7 +14,7 @@ namespace BowerBookAPI.Data.Collections
             get
             {
                 if (_client == null)
-                    _client = new MongoClient("");
+                    _client = new MongoClient("mongodb+srv://bower:bower3214@bowerbook-7pbxs.azure.mongodb.net/test?retryWrites=true&w=majority");
                 return _client;
             }
             set { _client = value; }
@@ -26,7 +26,7 @@ namespace BowerBookAPI.Data.Collections
             get
             {
                 if (_database == null)
-                    _database = Client.GetDatabase("");
+                    _database = Client.GetDatabase(DatabaseName);
                 return _database;
             }
         }

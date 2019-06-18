@@ -15,7 +15,7 @@ namespace BowerBookAPI.Services {
             if (repository != null)
                 _repository = repository;
             else
-                _repository = new CoreRepository(new BowerBookDatabase());
+                _repository = new CoreRepository(new InterestDatabase());
         }
 
         public List<Interest> GetAllInterests() {

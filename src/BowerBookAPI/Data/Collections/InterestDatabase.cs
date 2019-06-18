@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BowerBookAPI.Data.Collections
 {
-    public class BowerBookDatabase : BaseMongoDatabase
+    public class InterestDatabase : BaseMongoDatabase
     {
-        public override string DatabaseName => Constants.Data.DatabaseName;
+        public override string DatabaseName => Constants.Data.InterestDatabaseName;
     }
 }

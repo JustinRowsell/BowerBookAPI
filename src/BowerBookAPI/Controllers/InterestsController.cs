@@ -18,16 +18,16 @@ namespace BowerBookAPI.Controllers
         }
         // GET api/interests
         [HttpGet]
-        public IEnumerable<InterestModel> GetAll()
+        public IEnumerable<Interest> GetAll()
         {
             return _dataService.GetAllInterests();
         }
 
         // GET api/interests/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Interest Get(int id)
         {
-            return "value";
+            return _dataService.GetInterest(id);
         }
 
         // POST api/values
