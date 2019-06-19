@@ -58,13 +58,13 @@ namespace BowerBookAPI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+            app.UseHttpsRedirection();
+            app.UseMvc();
         }
     }
 }
