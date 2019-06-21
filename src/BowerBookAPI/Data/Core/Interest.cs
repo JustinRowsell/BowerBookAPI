@@ -3,10 +3,10 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace BowerBookAPI.Models.Core
+namespace BowerBookAPI.Data.Core
 {
     [DataContract]
-    public class InterestModel
+    public class Interest
     {
         [BsonId]
         public ObjectId _id { get; set; }

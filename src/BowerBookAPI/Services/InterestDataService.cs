@@ -3,6 +3,7 @@ using System.Linq;
 using Amazon.DynamoDBv2;
 using BowerBookAPI.Data;
 using BowerBookAPI.Data.Collections;
+using BowerBookAPI.Data.Core;
 using BowerBookAPI.Interfaces.Services;
 using BowerBookAPI.Models.Core;
 

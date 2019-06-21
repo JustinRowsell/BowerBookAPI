@@ -1,4 +1,5 @@
 ﻿using BowerBookAPI.Data.Collections;
+using BowerBookAPI.Data.Core;
 using BowerBookAPI.Interfaces.Data.Repository;
 using BowerBookAPI.Models.Core;
 using MongoDB.Bson;

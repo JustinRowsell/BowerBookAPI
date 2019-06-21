@@ -1,4 +1,4 @@
-﻿using BowerBookAPI.Models.Core;
+﻿using BowerBookAPI.Data.Core;
 using BowerBookAPI.Models.Global;
 using MongoDB.Bson;
 using MongoDB.Driver;

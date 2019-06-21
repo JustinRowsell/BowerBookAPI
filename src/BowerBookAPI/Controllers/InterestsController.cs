@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BowerBookAPI.Data.Core;
 using BowerBookAPI.Interfaces.Services;
 using BowerBookAPI.Models.Core;
 using Microsoft.AspNetCore.Mvc;

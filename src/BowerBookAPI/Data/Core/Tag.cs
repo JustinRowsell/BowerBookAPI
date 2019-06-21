@@ -1,8 +1,8 @@
 using BowerBookAPI.Interfaces.Data;
 
-namespace BowerBookAPI.Models.Core
+namespace BowerBookAPI.Data.Core
 {
-    public class TagModel : IUniqueId
+    public class Tag : IUniqueId
     {
         public int Id => TagId;
         public int TagId { get; set; }
