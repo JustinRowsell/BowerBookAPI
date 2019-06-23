@@ -16,7 +16,7 @@ namespace BowerBookAPI.Data.Collections
 
         public override Interest Get(ObjectId id)
         {
-            return Collection.AsQueryable<Interest>().FirstOrDefault(i => i._id == id);
+            return Collection.AsQueryable().FirstOrDefault(i => i.InterestId == id);
         }
     }
 }

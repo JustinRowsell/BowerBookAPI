@@ -1,7 +1,9 @@
+using MongoDB.Bson;
+
 namespace BowerBookAPI.Interfaces.Data 
 {
     public interface IUniqueId
     {
-        int Id { get; }
+        ObjectId Id { get; }
     }
 }

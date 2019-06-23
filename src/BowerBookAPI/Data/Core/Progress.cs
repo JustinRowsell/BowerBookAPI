@@ -1,14 +1,22 @@
 using System.Collections.Generic;
 using BowerBookAPI.Interfaces.Data;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace BowerBookAPI.Data.Core
 {
+    [BsonIgnoreExtraElements]
     public class Progress : IUniqueId
     {
-        public int Id => ProgressId;
-        public int ProgressId { get; set; }
+        [BsonIgnore]
+        public ObjectId Id => ProgressId;
+        [BsonElement]
+        public ObjectId ProgressId { get; set; }
+        [BsonElement]
         public string ProgressName { get; set; }
+        [BsonElement]
         public string Color { get; set; }
+        [BsonElement]
         public int? Sequence { get; set; }
     }
 }

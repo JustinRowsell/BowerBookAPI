@@ -18,6 +18,7 @@ namespace BowerBookAPI.Data
             _database = database;
         }
 
+        #region Interests
         public List<Interest> GetAllInterests()
         {
             return Interests.GetAll();
@@ -38,5 +39,57 @@ namespace BowerBookAPI.Data
                 return _interests;
             }
         }
+        #endregion
+
+        #region
+        private Tags _tags;
+        public Tags Tags
+        {
+            get
+            {
+                if (_tags == null)
+                    _tags = new Tags(_database.Database);
+                return _tags;
+            }
+        }
+        public List<Tag> GetAllTags()
+        {
+            return Tags.GetAll();
+        }
+        #endregion
+
+        #region Resources
+        private Resources _resources;
+        public Resources Resources
+        {
+            get
+            {
+                if (_resources == null)
+                    _resources = new Resources(_database.Database);
+                return _resources;
+            }
+        }
+        public List<Resource> GetAllResources()
+        {
+            return Resources.GetAll();
+        }
+        #endregion
+
+        #region Progress
+        private Progresses _progresses;
+        public Progresses Progresses
+        {
+            get
+            {
+                if (_progresses == null)
+                    _progresses = new Progresses(_database.Database);
+                return _progresses;
+            }
+        }
+        public List<Progress> GetAllProgresses()
+        {
+            return Progresses.GetAll();
+        }
+        #endregion
     }
 }

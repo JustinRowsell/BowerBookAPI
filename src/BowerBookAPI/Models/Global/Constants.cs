@@ -15,6 +15,7 @@ namespace BowerBookAPI.Models.Global
                 public static string Interests = "interests";
                 public static string Resources = "resources";
                 public static string Tags = "tags";
+                public static string Progress = "progress";
             }
         }
     }

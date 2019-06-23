@@ -5,7 +5,7 @@ using BowerBookAPI.Models.Core;
 namespace BowerBookAPI.Interfaces.Services {
   public interface IInterestDataService
   {
-        List<Interest> GetAllInterests();
-        Interest GetInterest(int id);
+        List<InterestModel> GetAllInterests();
+        InterestModel GetInterest(int id);
   }
 }

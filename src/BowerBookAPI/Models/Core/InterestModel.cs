@@ -1,3 +1,4 @@
+using BowerBookAPI.Interfaces.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
@@ -5,20 +6,14 @@ using System.Runtime.Serialization;
 
 namespace BowerBookAPI.Models.Core
 {
-    [DataContract]
-    public class InterestModel
+    public class InterestModel : IUniqueModelId
     {
-        [BsonId]
-        public ObjectId _id { get; set; }
-        [DataMember]
+        public string Id => InterestId;
+        public string InterestId { get; set; }
         public string InterestName { get; set; }
-        [DataMember]
         public string Category { get; set; }
-        [DataMember]
         public string Description { get; set; }
-        [DataMember]
-        public List<int> Resources { get; set; }
-        [DataMember]
-        public List<int> Tags { get; set; }
+        public List<ResourceModel> Resources { get; set; }
+        public List<TagModel> Tags { get; set; }
     }
 }
