@@ -56,6 +56,10 @@ namespace BowerBookAPI.Data
         {
             return Tags.GetAll();
         }
+        public Tag GetTag(ObjectId id)
+        {
+            return Tags.Get(id);
+        }
         #endregion
 
         #region Resources
@@ -73,6 +77,10 @@ namespace BowerBookAPI.Data
         {
             return Resources.GetAll();
         }
+        public Resource GetResource(ObjectId id)
+        {
+            return Resources.Get(id);
+        }
         #endregion
 
         #region Progress
@@ -85,6 +93,10 @@ namespace BowerBookAPI.Data
                     _progresses = new Progresses(_database.Database);
                 return _progresses;
             }
+        }
+        public Progress GetProgress(ObjectId id)
+        {
+            return Progresses.Get(id);
         }
         public List<Progress> GetAllProgresses()
         {

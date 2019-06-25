@@ -6,6 +6,7 @@ using BowerBookAPI.Data.Collections;
 using BowerBookAPI.Data.Core;
 using BowerBookAPI.Interfaces.Services;
 using BowerBookAPI.Models.Core;
+using MongoDB.Bson;
 
 namespace BowerBookAPI.Services {
   public class InterestDataService: IInterestDataService
@@ -80,9 +81,47 @@ namespace BowerBookAPI.Services {
             return models;
         }
 
-        public InterestModel GetInterest(int id)
-        {
-            throw new System.NotImplementedException();
+        public InterestModel GetInterest(string id)
+        {        
+            Interest interest = _repository.GetInterest(ObjectId.Parse(id));
+            var model = new InterestModel();
+            if (interest != null)
+            {
+                model = new InterestModel
+                {
+                    InterestId = interest.InterestId.ToString(),
+                    InterestName = interest.InterestName,
+                    Description = interest.Description,
+                    Category = interest.Category
+                };
+                model.Tags = new List<TagModel>();
+                foreach (var tagId in interest.Tags)
+                {
+                    Tag tag = _repository.GetTag(tagId);
+                    model.Tags.Add(new TagModel { TagId = tagId.ToString(), TagName = tag.TagName });
+                }
+                model.Resources = new List<ResourceModel>();
+                foreach (var resourceId in interest.Resources)
+                {
+                    var resource = _repository.GetResource(resourceId);
+                    var progress = _repository.GetProgress(resource.ProgressId);
+                    model.Resources.Add(new ResourceModel
+                    {
+                        ResourceId = resourceId.ToString(),
+                        ResourceLink = resource.ResourceLink,
+                        ResourceName = resource.ResourceName,
+                        Progress = new ProgressModel {
+                            ProgressId = progress.ProgressId.ToString(),
+                            ProgressName = progress.ProgressName,
+                            Color = progress.Color,
+                            Sequence = progress.Sequence
+                        }
+                    });
+                }
+            }
+
+
+            return model;
         }
   }
 }

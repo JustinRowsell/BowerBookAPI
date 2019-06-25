@@ -26,7 +26,7 @@ namespace BowerBookAPI.Controllers
 
         // GET api/interests/5
         [HttpGet("{id}")]
-        public InterestModel Get(int id)
+        public InterestModel Get(string id)
         {
             return _dataService.GetInterest(id);
         }
