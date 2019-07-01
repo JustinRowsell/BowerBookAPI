@@ -7,5 +7,8 @@ namespace BowerBookAPI.Interfaces.Services {
   {
         List<InterestModel> GetAllInterests();
         InterestModel GetInterest(string id);
-  }
+        IEnumerable<ResourceModel> GetAllResources();
+        IEnumerable<ProgressModel> GetAllProgresses();
+        ProgressModel GetProgress(string progressId);
+    }
 }

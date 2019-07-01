@@ -9,8 +9,8 @@ using BowerBookAPI.Models.Core;
 using MongoDB.Bson;
 
 namespace BowerBookAPI.Services {
-  public class InterestDataService: IInterestDataService
-  {
+    public class InterestDataService : IInterestDataService
+    {
         private CoreRepository _repository;
         public InterestDataService(CoreRepository repository = null)
         {
@@ -18,6 +18,51 @@ namespace BowerBookAPI.Services {
                 _repository = repository;
             else
                 _repository = new CoreRepository(new InterestDatabase());
+        }
+
+        public IEnumerable<ResourceModel> GetAllResources()
+        {
+            var resources = new List<ResourceModel>();
+            var resourcesDb = _repository.GetAllResources();
+            foreach (var resource in resourcesDb)
+            {
+                resources.Add(new ResourceModel
+                {
+                    ResourceId = resource.ResourceId.ToString(),
+                    ResourceName = resource.ResourceName,
+                    ResourceLink = resource.ResourceLink,
+                    Progress = GetProgress(resource.ProgressId.ToString())
+                });
+            }
+            return resources;
+        }
+
+        public IEnumerable<ProgressModel> GetAllProgresses()
+        {
+            var progressModels = new List<ProgressModel>();
+            var progresses = _repository.GetAllProgresses();
+            foreach (var progress in progresses)
+            {
+                progressModels.Add(GetProgressModel(progress));
+            }
+            return progressModels;
+        }
+
+        public ProgressModel GetProgressModel(Progress progress)
+        {
+            return new ProgressModel
+            {
+                ProgressId = progress.ProgressId.ToString(),
+                ProgressName = progress.ProgressName,
+                Color = progress.Color,
+                Sequence = progress.Sequence
+            };
+        }
+
+        public ProgressModel GetProgress(string progressId)
+        {
+            var progress = _repository.GetProgress(ObjectId.Parse(progressId));
+            return GetProgressModel(progress);
         }
 
         public List<InterestModel> GetAllInterests() {
