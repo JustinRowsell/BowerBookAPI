@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BowerBookAPI.Data.Core;
 using BowerBookAPI.Interfaces.Services;
 using BowerBookAPI.Models.Core;
 using Microsoft.AspNetCore.Mvc;
@@ -25,27 +26,30 @@ namespace BowerBookAPI.Controllers
 
         // GET api/interests/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public InterestModel Get(string id)
         {
-            return "value";
+            return _dataService.GetInterest(id);
         }
 
         // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            throw new NotImplementedException();
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+            throw new NotImplementedException();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }

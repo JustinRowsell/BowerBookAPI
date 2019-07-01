@@ -1,13 +1,14 @@
-using BowerBookAPI.Interfaces.Data;
+using BowerBookAPI.Data.Core;
+using BowerBookAPI.Interfaces.Models;
 
 namespace BowerBookAPI.Models.Core
 {
-    public class ResourceModel : IUniqueId
+    public class ResourceModel : IUniqueModelId
     {
-        public int Id => ResourceId;
-        public int ResourceId { get; set; }
+        public string Id => ResourceId;
+        public string ResourceId { get; set; }
         public string ResourceName { get; set; }
-        public string Link { get; set; }
+        public string ResourceLink { get; set; }
         public ProgressModel Progress { get; set; }
     }
 }

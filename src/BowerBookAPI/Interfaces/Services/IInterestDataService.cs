@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using BowerBookAPI.Data.Core;
 using BowerBookAPI.Models.Core;
 
 namespace BowerBookAPI.Interfaces.Services {
   public interface IInterestDataService
   {
         List<InterestModel> GetAllInterests();
-        InterestModel GetInterest(int id);
-  }
+        InterestModel GetInterest(string id);
+        IEnumerable<ResourceModel> GetAllResources();
+        IEnumerable<ProgressModel> GetAllProgresses();
+        ProgressModel GetProgress(string progressId);
+    }
 }
