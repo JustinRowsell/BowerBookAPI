@@ -30,6 +30,33 @@ namespace BowerBookAPI.Data
         }
 
         private Interests _interests;
+
+        public ObjectId CreateInterest(InterestModel model)
+        {
+            var resources = new List<ObjectId>();
+            var tags = new List<ObjectId>();
+            foreach (var res in model.Resources)
+            {
+                resources.Add(ObjectId.Parse(res.ResourceId));
+            }
+            foreach (var tag in model.Tags)
+            {
+                tags.Add(ObjectId.Parse(tag.TagId));
+            }
+            var newIterest = new Interest
+            {
+                InterestId = ObjectId.GenerateNewId(),
+                InterestName = model.InterestName,
+                Category = model.Category,
+                Resources = resources,
+                Description = model.Description,
+                Tags = tags
+            };
+
+            Interests.Collection.InsertOne(newIterest);
+            return newIterest.InterestId;
+        }
+
         public Interests Interests
         {
             get
@@ -101,6 +128,20 @@ namespace BowerBookAPI.Data
         public List<Progress> GetAllProgresses()
         {
             return Progresses.GetAll();
+        }
+
+        public ObjectId CreateResource(ResourceModel model)
+        {
+            var newRes = new Resource
+            {
+                ResourceId = ObjectId.GenerateNewId(),
+                ResourceLink = model.ResourceLink,
+                ResourceName = model.ResourceName,
+                ProgressId = GetAllProgresses().First(p => p.ProgressName == "Not Started").ProgressId
+            };
+
+            Resources.Collection.InsertOne(newRes);
+            return newRes.ResourceId;
         }
         #endregion
     }

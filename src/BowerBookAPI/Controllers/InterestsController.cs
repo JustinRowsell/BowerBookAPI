@@ -32,10 +32,10 @@ namespace BowerBookAPI.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("new")]
+        public string Post([FromBody]InterestModel interest)
         {
-            throw new NotImplementedException();
+            return _dataService.CreateInterest(interest);
         }
 
         // PUT api/values/5

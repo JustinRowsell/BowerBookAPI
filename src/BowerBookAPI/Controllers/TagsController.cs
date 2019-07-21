@@ -9,26 +9,19 @@ using System.Threading.Tasks;
 namespace BowerBookAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ResourcesController
+    public class TagsController
     {
         private IInterestDataService _dataService;
-        public ResourcesController(IInterestDataService dataService)
+        public TagsController(IInterestDataService dataService)
         {
             _dataService = dataService;
         }
 
         // GET api/resources
         [HttpGet]
-        public IEnumerable<ResourceModel> GetAll()
+        public IEnumerable<TagModel> GetAll()
         {
-            return _dataService.GetAllResources();
-        }
-
-        // POST api/values
-        [HttpPost("new")]
-        public string Post([FromBody]ResourceModel resource)
-        {
-            return _dataService.CreateResource(resource);
+            return _dataService.GetAllTags();
         }
     }
 }

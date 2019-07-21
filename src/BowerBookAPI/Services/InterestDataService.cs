@@ -11,19 +11,29 @@ using MongoDB.Bson;
 namespace BowerBookAPI.Services {
     public class InterestDataService : IInterestDataService
     {
+        private bool _offline = false;
         private CoreRepository _repository;
         public InterestDataService(CoreRepository repository = null)
         {
             if (repository != null)
                 _repository = repository;
-            else
+            else if (_offline == false)
                 _repository = new CoreRepository(new InterestDatabase());
+        }
+
+        public string CreateInterest(InterestModel model)
+        {
+            return _repository.CreateInterest(model).ToString();
         }
 
         public IEnumerable<ResourceModel> GetAllResources()
         {
             var resources = new List<ResourceModel>();
-            var resourcesDb = _repository.GetAllResources();
+            List<Resource> resourcesDb = null;
+            if (!_offline)
+                resourcesDb = _repository.GetAllResources();
+            else
+                resourcesDb = Offline.Data.Resources;
             foreach (var resource in resourcesDb)
             {
                 resources.Add(new ResourceModel
@@ -37,10 +47,34 @@ namespace BowerBookAPI.Services {
             return resources;
         }
 
+        public IEnumerable<TagModel> GetAllTags()
+        {
+            var tags = new List<TagModel>();
+            List<Tag> tagsDb = null;
+            if (!_offline)
+                tagsDb = _repository.GetAllTags();
+            else
+                tagsDb = Offline.Data.Tags;
+            foreach (var tag in tagsDb)
+            {
+                tags.Add(new TagModel
+                {
+                    TagId = tag.TagId.ToString(),
+                    TagName = tag.TagName
+                });
+            }
+            return tags;
+        }
+
         public IEnumerable<ProgressModel> GetAllProgresses()
         {
             var progressModels = new List<ProgressModel>();
-            var progresses = _repository.GetAllProgresses();
+            List<Progress> progresses = null;
+            if (!_offline)
+                progresses = _repository.GetAllProgresses();
+            else
+                progresses = Offline.Data.Progress;
+
             foreach (var progress in progresses)
             {
                 progressModels.Add(GetProgressModel(progress));
@@ -61,16 +95,35 @@ namespace BowerBookAPI.Services {
 
         public ProgressModel GetProgress(string progressId)
         {
-            var progress = _repository.GetProgress(ObjectId.Parse(progressId));
+            Progress progress = null;
+            if (!_offline)
+                progress = _repository.GetProgress(ObjectId.Parse(progressId));
+            else
+                progress = Offline.Data.Progress.First(p => p.ProgressId == ObjectId.Parse(progressId));
             return GetProgressModel(progress);
         }
 
         public List<InterestModel> GetAllInterests() {
             var models = new List<InterestModel>();
-            var interests = _repository.GetAllInterests();
-            var resources = _repository.GetAllResources();
-            var tags = _repository.GetAllTags();
-            var progresses = _repository.GetAllProgresses();
+            List<Interest> interests = null;
+            List<Resource> resources = null;
+            List<Tag> tags = null;
+            List<Progress> progresses = null;
+            if (_offline)
+            {
+                interests = Offline.Data.Interests;
+                resources = Offline.Data.Resources;
+                progresses = Offline.Data.Progress;
+                tags = Offline.Data.Tags;
+            }
+            else
+            {
+                interests = _repository.GetAllInterests();
+                resources = _repository.GetAllResources();
+                tags = _repository.GetAllTags();
+                progresses = _repository.GetAllProgresses();
+            }
+            
 
             foreach (var interest in interests)
             {
@@ -120,8 +173,8 @@ namespace BowerBookAPI.Services {
                         }                    
                         model.Resources.Add(resourceModel);
                     }
-                    models.Add(model);
                 }
+                models.Add(model);
             }
             return models;
         }
@@ -168,5 +221,10 @@ namespace BowerBookAPI.Services {
 
             return model;
         }
-  }
+
+        public string CreateResource(ResourceModel resource)
+        {
+            return _repository.CreateResource(resource).ToString();
+        }
+    }
 }
