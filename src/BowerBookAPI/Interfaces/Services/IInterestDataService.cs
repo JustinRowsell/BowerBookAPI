@@ -13,5 +13,6 @@ namespace BowerBookAPI.Interfaces.Services {
         ProgressModel GetProgress(string progressId);
         string CreateInterest(InterestModel interest);
         string CreateResource(ResourceModel resource);
+        string CreateTag(TagModel tag);
     }
 }

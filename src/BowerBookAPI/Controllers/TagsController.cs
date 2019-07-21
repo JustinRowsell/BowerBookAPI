@@ -23,5 +23,12 @@ namespace BowerBookAPI.Controllers
         {
             return _dataService.GetAllTags();
         }
+
+        // POST api/values
+        [HttpPost("new")]
+        public string Post([FromBody]TagModel tag)
+        {
+            return _dataService.CreateTag(tag);
+        }
     }
 }

@@ -143,6 +143,18 @@ namespace BowerBookAPI.Data
             Resources.Collection.InsertOne(newRes);
             return newRes.ResourceId;
         }
+
+        public ObjectId CreateTag(TagModel model)
+        {
+            var newTag = new Tag
+            {
+                TagId = ObjectId.GenerateNewId(),
+                TagName = model.TagName
+            };
+
+            Tags.Collection.InsertOne(newTag);
+            return newTag.TagId;
+        }
         #endregion
     }
 }

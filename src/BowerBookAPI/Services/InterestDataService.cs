@@ -226,5 +226,10 @@ namespace BowerBookAPI.Services {
         {
             return _repository.CreateResource(resource).ToString();
         }
+
+        public string CreateTag(TagModel tag)
+        {
+            return _repository.CreateTag(tag).ToString();
+        }
     }
 }
