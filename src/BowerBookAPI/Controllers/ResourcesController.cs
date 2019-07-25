@@ -30,5 +30,12 @@ namespace BowerBookAPI.Controllers
         {
             return _dataService.CreateResource(resource);
         }
+
+        // POST api/values
+        [HttpPost("add")]
+        public async Task<string> Post([FromBody]AddResourceModel resource)
+        {
+            return await _dataService.AddResourceToInterest(resource.Id, resource.Name, resource.Link);
+        }
     }
 }

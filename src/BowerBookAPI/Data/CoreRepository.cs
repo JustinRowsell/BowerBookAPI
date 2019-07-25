@@ -144,6 +144,20 @@ namespace BowerBookAPI.Data
             return newRes.ResourceId;
         }
 
+        public async Task<ObjectId> CreateResourceAsync(ResourceModel model)
+        {
+            var newRes = new Resource
+            {
+                ResourceId = ObjectId.GenerateNewId(),
+                ResourceLink = model.ResourceLink,
+                ResourceName = model.ResourceName,
+                ProgressId = GetAllProgresses().First(p => p.ProgressName == "Not Started").ProgressId
+            };
+
+            Resources.Collection.InsertOne(newRes);
+            return newRes.ResourceId;
+        }
+
         public ObjectId CreateTag(TagModel model)
         {
             var newTag = new Tag

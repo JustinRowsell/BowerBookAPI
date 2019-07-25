@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using BowerBookAPI.Data;
 using BowerBookAPI.Data.Collections;
@@ -7,6 +8,7 @@ using BowerBookAPI.Data.Core;
 using BowerBookAPI.Interfaces.Services;
 using BowerBookAPI.Models.Core;
 using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace BowerBookAPI.Services {
     public class InterestDataService : IInterestDataService
@@ -50,7 +52,7 @@ namespace BowerBookAPI.Services {
         public IEnumerable<TagModel> GetAllTags()
         {
             var tags = new List<TagModel>();
-            List<Tag> tagsDb = null;
+            List<Data.Core.Tag> tagsDb = null;
             if (!_offline)
                 tagsDb = _repository.GetAllTags();
             else
@@ -107,7 +109,7 @@ namespace BowerBookAPI.Services {
             var models = new List<InterestModel>();
             List<Interest> interests = null;
             List<Resource> resources = null;
-            List<Tag> tags = null;
+            List<Data.Core.Tag> tags = null;
             List<Progress> progresses = null;
             if (_offline)
             {
@@ -195,7 +197,7 @@ namespace BowerBookAPI.Services {
                 model.Tags = new List<TagModel>();
                 foreach (var tagId in interest.Tags)
                 {
-                    Tag tag = _repository.GetTag(tagId);
+                    Data.Core.Tag tag = _repository.GetTag(tagId);
                     model.Tags.Add(new TagModel { TagId = tagId.ToString(), TagName = tag.TagName });
                 }
                 model.Resources = new List<ResourceModel>();
@@ -230,6 +232,25 @@ namespace BowerBookAPI.Services {
         public string CreateTag(TagModel tag)
         {
             return _repository.CreateTag(tag).ToString();
+        }
+
+        public async Task<string> AddResourceToInterest(string id, string name, string link)
+        {
+    
+            var pid = _repository.GetAllProgresses().First(p => p.ProgressName == "Not Started").ProgressId;
+            var newId = await _repository.CreateResourceAsync(new ResourceModel
+            {
+                ResourceLink = link,
+                ResourceName = name
+            });
+            var interest = _repository.GetInterest(ObjectId.Parse(id));
+            interest.Resources.Add(newId);
+
+            await _repository.Interests.Collection.FindOneAndUpdateAsync(
+                                Builders<Interest>.Filter.Eq("InterestId", ObjectId.Parse(id)),
+                                Builders<Interest>.Update.Set("Resources", interest.Resources)
+                                );
+            return newId.ToString();
         }
     }
 }
