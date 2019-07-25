@@ -16,5 +16,6 @@ namespace BowerBookAPI.Interfaces.Services {
         string CreateResource(ResourceModel resource);
         string CreateTag(TagModel tag);
         Task<string> AddResourceToInterest(string id, string name, string link);
+        Task<string> UpdateInterest(InterestModel model);
     }
 }

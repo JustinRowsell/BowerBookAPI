@@ -31,18 +31,16 @@ namespace BowerBookAPI.Controllers
             return _dataService.GetInterest(id);
         }
 
-        // POST api/values
         [HttpPost("new")]
         public string Post([FromBody]InterestModel interest)
         {
             return _dataService.CreateInterest(interest);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("update")]
+        public async Task<string> Put([FromBody]InterestModel model)
         {
-            throw new NotImplementedException();
+            return await _dataService.UpdateInterest(model);
         }
 
         // DELETE api/values/5

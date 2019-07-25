@@ -252,5 +252,15 @@ namespace BowerBookAPI.Services {
                                 );
             return newId.ToString();
         }
+
+        public async Task<string> UpdateInterest(InterestModel model)
+        {
+            var id = ObjectId.Parse(model.InterestId);
+            await _repository.Interests.Collection.FindOneAndUpdateAsync(
+                Builders<Interest>.Filter.Eq("InterestId", id),
+                Builders<Interest>.Update.Set("InterestName", model.InterestName).Set("Description", model.Description)
+                );
+            return id.ToString();
+        }
     }
 }
