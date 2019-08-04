@@ -37,5 +37,11 @@ namespace BowerBookAPI.Controllers
         {
             return await _dataService.AddResourceToInterest(resource.Id, resource.Name, resource.Link);
         }
+
+        [HttpPut("update")]
+        public async Task<string> Put([FromBody]ResourceModel model)
+        {
+            return await _dataService.UpdateResource(model);
+        }
     }
 }

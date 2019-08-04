@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -256,11 +257,28 @@ namespace BowerBookAPI.Services {
         public async Task<string> UpdateInterest(InterestModel model)
         {
             var id = ObjectId.Parse(model.InterestId);
-            await _repository.Interests.Collection.FindOneAndUpdateAsync(
+            try
+            {
+                await _repository.Interests.Collection.FindOneAndUpdateAsync(
                 Builders<Interest>.Filter.Eq("InterestId", id),
                 Builders<Interest>.Update.Set("InterestName", model.InterestName).Set("Description", model.Description)
                 );
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             return id.ToString();
+        }
+
+        public async Task<string> UpdateResource(ResourceModel model)
+        {
+            var id = ObjectId.Parse(model.ResourceId);
+            await _repository.Resources.Collection.FindOneAndUpdateAsync(
+                Builders<Resource>.Filter.Eq("ResourceId", id),
+                Builders<Resource>.Update.Set("ProgressId", model.Progress.ProgressId)
+                );
+            return model.ResourceId;
         }
     }
 }
