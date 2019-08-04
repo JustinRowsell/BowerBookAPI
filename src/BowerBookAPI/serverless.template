@@ -27,7 +27,7 @@
 				"Type" : "AWS::Serverless::Function",
 				"Properties": {
 				"Handler": "BowerBookAPI::BowerBookAPI.LambdaEntryPoint::FunctionHandlerAsync",
-				"Runtime": "dotnetcore2.1",
+				"Runtime": "provided",
 				"CodeUri": "",
 				"MemorySize": 256,
 				"Timeout": 30,
